@@ -1,0 +1,1 @@
+<h1>Bootstrap template for DC golang services</h1>

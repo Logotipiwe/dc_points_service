@@ -1,0 +1,15 @@
+version: '3.6'
+services:
+  idp:
+    container_name: [[NAME]] //REPLACEME
+    restart: always
+    image: ${IMAGE}
+    networks:
+      - dc-net
+    environment:
+      DB_HOST: ${DB_HOST}
+#    ports:
+#      - 82:81
+networks:
+  dc-net:
+    external: true
