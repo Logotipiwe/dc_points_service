@@ -49,10 +49,10 @@ jobs:
         script: |
           export IMAGE=${{ env.IMAGE }}
           
-          export DB_HOST: ${{ env.DB_HOST }}
-          export DB_USER: ${{ env.DB_USER }}
-          export DB_PASS: ${{ env.DB_PASS }}
-          export M_TOKEN: ${{ env.M_TOKEN }}
+          export DB_HOST=${{ env.DB_HOST }}
+          export DB_USER=${{ env.DB_USER }}
+          export DB_PASS=${{ env.DB_PASS }}
+          export M_TOKEN=${{ env.M_TOKEN }}
           
           docker-compose -f /kuber/points-service/points-service.yml down --remove-orphans
           docker-compose -f /kuber/points-service/points-service.yml up -d
