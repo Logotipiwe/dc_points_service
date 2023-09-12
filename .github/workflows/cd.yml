@@ -53,7 +53,6 @@ jobs:
           export DB_USER: ${{ env.DB_USER }}
           export DB_PASS: ${{ env.DB_PASS }}
           export M_TOKEN: ${{ env.M_TOKEN }}
-          #export [[PARAM NAME]]=${{ env.[[PARAM_NAME_ENV]] }} //REPLACEME
           
           docker-compose -f /kuber/points-service/points-service.yml down --remove-orphans
           docker-compose -f /kuber/points-service/points-service.yml up -d
