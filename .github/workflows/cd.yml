@@ -1,5 +1,4 @@
-name: [[NAME]] CD //REPLACEME
-
+name: Points service CD
 on:
   push:
     branches: [ "main" ]
@@ -27,7 +26,7 @@ jobs:
       id: build_push
       run: |
         ls
-        export IMAGE=${{ env.DOCKER_USER }}/[[SERVICE_NAME]]:$(date +%s) //REPLACEME
+        export IMAGE=${{ env.DOCKER_USER }}/points-service:$(date +%s)
         docker build . -t ${IMAGE}
         docker push ${IMAGE}
         echo "IMAGE=${IMAGE}" >> "$GITHUB_ENV"
@@ -36,7 +35,7 @@ jobs:
       with:
         local: .
         concurrency: 20
-        remote: /kuber/[[SERVICE_NAME]] //REPLACEME
+        remote: /kuber/points-service
         host: ${{ env.DC_HOST }}
         username: ${{ env.SSH_USER }}
         password: ${{ env.SSH_PASSWORD }}
@@ -50,7 +49,11 @@ jobs:
         script: |
           export IMAGE=${{ env.IMAGE }}
           
-          export [[PARAM NAME]]=${{ env.[[PARAM_NAME_ENV]] }} //REPLACEME
+          export DB_HOST: ${{ env.DB_HOST }}
+          export DB_USER: ${{ env.DB_USER }}
+          export DB_PASS: ${{ env.DB_PASS }}
+          export M_TOKEN: ${{ env.M_TOKEN }}
+          #export [[PARAM NAME]]=${{ env.[[PARAM_NAME_ENV]] }} //REPLACEME
           
-          docker-compose -f /kuber/[[SERVICE_NAME]]/[[SERVICE_NAME]].yml down --remove-orphans //REPLACEME
-          docker-compose -f /kuber/[[SERVICE_NAME]]/[[SERVICE_NAME]].yml up -d //REPLACEME
+          docker-compose -f /kuber/points-service/points-service.yml down --remove-orphans
+          docker-compose -f /kuber/points-service/points-service.yml up -d

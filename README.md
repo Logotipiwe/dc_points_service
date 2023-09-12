@@ -1,1 +1,2 @@
-<h1>Bootstrap template for DC golang services</h1>
+<h1>Points service</h1>
+Responsible for earning points of any type by users of DC services.

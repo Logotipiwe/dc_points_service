@@ -1,16 +1,22 @@
 version: '3.6'
 services:
-  idp:
-    container_name: [[NAME]] //REPLACEME
+  points-service:
+    container_name: points-service
     restart: always
     build: .
     networks:
       - dc-net
     environment:
-      DB_HOST: ${DB_HOST} //REPLACEME
+      DB_HOST: ${DB_HOST}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      M_TOKEN: ${M_TOKEN}
+      DB_NAME: points-service
+      CONTAINER_PORT: 80
+#     REPLACEME
 
-#    ports:
-#      - 82:80
+    ports:
+      - 82:80
 networks:
   dc-net:
     external: true

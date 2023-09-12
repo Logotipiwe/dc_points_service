@@ -5,7 +5,7 @@
         <option name="envFilePath" value="C:\PhpstormProjects\dc_vars\local.env" />
         <option name="removeImagesOnComposeDown" value="LOCAL" />
         <option name="commandLineOptions" value="--build" />
-        <option name="sourceFilePath" value="[[SERVICE_NAME]].local.yml" /> //REPLACEME
+        <option name="sourceFilePath" value="idp.local.yml" />
         <option name="upForceRecreate" value="true" />
       </settings>
     </deployment>

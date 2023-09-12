@@ -1,8 +1,9 @@
-create database [[DB_NAME]]; //REPLACEME
-create table idp.users
+create database `points-service`;
+use `points-service`;
+create table points
 (
-    id        varchar(255) not null,
-    name      varchar(255) not null,
-    picture   varchar(255) null,
-    google_id varchar(255) null
+    id              varchar(255) not null,
+    point_type      varchar(255) not null,
+    user_id         varchar(255) not null,
+    amount          varchar(255) not null
 );

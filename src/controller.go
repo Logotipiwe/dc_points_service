@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"os"
 )
@@ -10,8 +11,9 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	http.HandleFunc("/auth", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/hi", func(w http.ResponseWriter, r *http.Request) {
 		println("/auth")
+		fmt.Fprintf(w, "Hi!")
 	})
 
 	println("Ready")
