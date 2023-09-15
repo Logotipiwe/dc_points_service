@@ -7,13 +7,14 @@ services:
     networks:
       - dc-net
     environment:
-      DB_HOST: ${DB_HOST}
-      DB_USER: ${DB_USER}
-      DB_PASS: ${DB_PASS}
-      M_TOKEN: ${M_TOKEN}
       DB_NAME: points-service
-      CONTAINER_PORT: 80
-#     REPLACEME
+
+      #CONFIG SERVER
+      CONFIG_SERVER_URL: http://config_server
+      SERVICE_NAME: points-service
+      NAMESPACE: dev-dc
+      M_TOKEN: ${M_TOKEN}
+      #END CONFIG SERVER
 
 #    ports:
 #      - 82:81

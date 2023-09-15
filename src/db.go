@@ -10,7 +10,7 @@ import (
 var db *sql.DB
 
 func InitDb() error {
-	connectionStr := fmt.Sprintf("%v:%v@tcp(%v)/%v", GetConfig("DB_USER"), GetConfig("DB_PASS"),
+	connectionStr := fmt.Sprintf("%v:%v@tcp(%v)/%v", GetConfig("DB_LOGIN"), GetConfig("DB_PASS"),
 		GetConfig("DB_HOST"), GetConfig("DB_NAME"))
 	conn, err := sql.Open("mysql", connectionStr)
 	if err != nil {
