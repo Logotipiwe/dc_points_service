@@ -4,11 +4,14 @@ import (
 	"fmt"
 	"github.com/logotipiwe/dc_go_utils/src/config"
 	"net/http"
-	"os"
 )
 
 func main() {
 	err := initializeApp()
+
+	http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprint(w, "ok")
+	})
 
 	//user auth
 	http.Handle("/get-points", appHandler(getPoints))
@@ -16,8 +19,7 @@ func main() {
 	//m2m auth
 	http.Handle("/change-points", appHandler(changePoints))
 
-	println("Ready")
-	err = http.ListenAndServe(":"+os.Getenv("CONTAINER_PORT"), nil)
+	err = http.ListenAndServe(":"+config.GetConfig("CONTAINER_PORT"), nil)
 	println("Server up!")
 	if err != nil {
 		panic("Lol server fell")
