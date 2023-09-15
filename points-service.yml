@@ -1,7 +1,7 @@
 version: '3.6'
 services:
-  points-service:
-    container_name: points-service
+  points_service:
+    container_name: points_service
     restart: always
     image: ${IMAGE}
     networks:
