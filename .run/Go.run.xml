@@ -1,0 +1,21 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Go" type="GoApplicationRunConfiguration" factoryName="Go Application">
+    <module name="dc_points_service" />
+    <working_directory value="$PROJECT_DIR$" />
+    <envs>
+      <env name="CONFIG_SERVER_URL" value="http://localhost/config_server" />
+      <env name="CONTAINER_PORT" value="3010" />
+      <env name="DB_HOST" value="localhost" />
+      <env name="DB_NAME" value="points-service" />
+      <env name="DB_PASS" value="1234" />
+      <env name="DB_USER" value="root" />
+      <env name="M_TOKEN" value="4321" />
+      <env name="SERVICE_NAME" value="points-service" />
+    </envs>
+    <kind value="PACKAGE" />
+    <package value="dc_points_service/src" />
+    <directory value="$PROJECT_DIR$" />
+    <filePath value="$PROJECT_DIR$/src/controller.go" />
+    <method v="2" />
+  </configuration>
+</component>
