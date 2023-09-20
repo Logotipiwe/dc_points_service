@@ -1,8 +1,9 @@
 name: Test CD
 on:
-#  push:
-#    branches: [ "main" ]
+  push:
+    branches: [ "dev" ]
   workflow_dispatch:
+  workflow_call:
 
 jobs:
   cd:
