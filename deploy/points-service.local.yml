@@ -3,7 +3,7 @@ services:
   points-service:
     container_name: points-service
     restart: always
-    build: .
+    build: ..
     networks:
       - dc-net
     environment:

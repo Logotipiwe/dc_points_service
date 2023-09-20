@@ -1,12 +1,23 @@
-name: Points service CD
+name: Deploy
 on:
   push:
     branches: [ "main" ]
   workflow_dispatch:
+  workflow_call:
+    outputs:
+      dockerBuild:
+        description: Docker build image
+        value: ${{ jobs.deploy.outputs.dockerBuild }}
+      deployMsg:
+        description: Output of docker up command
+        value: ${{ jobs.deploy.outputs.deployMsg }}
 
 jobs:
-  cd:
+  deploy:
     runs-on: ubuntu-latest
+    outputs:
+      dockerBuild: ${{ steps.build_push.outputs.dockerBuild }}
+      deployMsg: ${{ steps.deploy.outputs.deployMsg }}
     steps:
     - uses: actions/checkout@v3
       with:
@@ -30,16 +41,18 @@ jobs:
         docker build . -t ${IMAGE}
         docker push ${IMAGE}
         echo "IMAGE=${IMAGE}" >> "$GITHUB_ENV"
+        echo "::set-output name=dockerBuild::${IMAGE}"
     - name: Upload
       uses: garygrossgarten/github-action-scp@release
       with:
-        local: .
+        local: ./deploy
         concurrency: 20
         remote: /kuber/points-service
         host: ${{ env.DC_HOST }}
         username: ${{ env.SSH_USER }}
         password: ${{ env.SSH_PASSWORD }}
     - name: Deploy
+      id: deploy
       uses: appleboy/ssh-action@v0.1.10
       with:
         host: ${{ env.DC_HOST }}
@@ -48,11 +61,8 @@ jobs:
         port: 22
         script: |
           export IMAGE=${{ env.IMAGE }}
-          
-          export DB_HOST=${{ env.DB_HOST }}
-          export DB_USER=${{ env.DB_USER }}
-          export DB_PASS=${{ env.DB_PASS }}
           export M_TOKEN=${{ env.M_TOKEN }}
           
           docker-compose -f /kuber/points-service/points-service.yml down --remove-orphans
-          docker-compose -f /kuber/points-service/points-service.yml up -d
+          MSG=$(docker-compose -f /kuber/points-service/points-service.yml up -d 2>&1 | tee /dev/tty)
+          echo "::set-output name=deployMsg::${MSG}"

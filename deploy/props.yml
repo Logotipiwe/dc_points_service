@@ -1,6 +1,0 @@
-schema:
-  PARAM_NAME: string|num //REPLACEME
-  DB_HOST: string
-  DB_USER: string
-  DB_PASS: string
-  M_TOKEN: string
