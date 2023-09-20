@@ -4,20 +4,10 @@ on:
     branches: [ "main" ]
   workflow_dispatch:
   workflow_call:
-    outputs:
-      dockerBuild:
-        description: Docker build image
-        value: ${{ jobs.deploy.outputs.dockerBuild }}
-      deployMsg:
-        description: Output of docker up command
-        value: ${{ jobs.deploy.outputs.deployMsg }}
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    outputs:
-      dockerBuild: ${{ steps.build_push.outputs.dockerBuild }}
-      deployMsg: ${{ steps.deploy.outputs.deployMsg }}
     steps:
     - uses: actions/checkout@v3
       name: Checkout env
@@ -46,7 +36,6 @@ jobs:
         docker build . -t ${IMAGE}
         docker push ${IMAGE}
         echo "IMAGE=${IMAGE}" >> "$GITHUB_ENV"
-        echo "dockerBuild=${IMAGE}" >> "$GITHUB_OUTPUT"
     - name: Upload
       uses: garygrossgarten/github-action-scp@release
       with:
