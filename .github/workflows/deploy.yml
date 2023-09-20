@@ -46,7 +46,7 @@ jobs:
         docker build . -t ${IMAGE}
         docker push ${IMAGE}
         echo "IMAGE=${IMAGE}" >> "$GITHUB_ENV"
-        echo "::set-output name=dockerBuild::${IMAGE}"
+        echo "dockerBuild=${IMAGE}" >> "$GITHUB_OUTPUT"
     - name: Upload
       uses: garygrossgarten/github-action-scp@release
       with:
@@ -70,4 +70,4 @@ jobs:
           
           docker-compose -f /kuber/points-service/points-service.yml down --remove-orphans
           MSG=$(docker-compose -f /kuber/points-service/points-service.yml up -d 2>&1 | tee /dev/tty)
-          echo "::set-output name=deployMsg::${MSG}"
+          echo "deployMsg=${MSG}" >> "$GITHUB_OUTPUT"
