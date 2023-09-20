@@ -69,5 +69,4 @@ jobs:
           export M_TOKEN=${{ env.M_TOKEN }}
           
           docker-compose -f /kuber/points-service/points-service.yml down --remove-orphans
-          MSG=$(docker-compose -f /kuber/points-service/points-service.yml up -d 2>&1 | tee /dev/tty)
-          echo "deployMsg=${MSG}" >> "$GITHUB_OUTPUT"
+          docker-compose -f /kuber/points-service/points-service.yml up -d
